@@ -29,7 +29,7 @@ function validatePhoneNumber(value: string) {
 	}
 }
 
-export const Form = () => {
+export default function Form() {
 	const {
 		register,
 		control,
@@ -84,4 +84,4 @@ export const Form = () => {
 			</form>
 		</section>
 	);
-};
+}
