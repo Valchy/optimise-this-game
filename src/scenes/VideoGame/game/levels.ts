@@ -1,7 +1,7 @@
 import { enemyHeight, enemyWidth, scenePadding } from './constants';
 import { EnemySpawn, Vector } from './types';
 import { getRandomSnakeLines } from './utils';
-import { times } from 'lodash';
+import times from 'lodash/times';
 
 /**
  * Generate a random position for an enemy. Tries to responsively account for enemy widths and padding.
