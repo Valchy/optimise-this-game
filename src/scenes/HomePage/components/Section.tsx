@@ -1,5 +1,5 @@
 import { ReactNode, useMemo } from 'react';
-import { capitalize } from 'lodash';
+import capitalize from 'lodash/capitalize';
 import { faker } from '@faker-js/faker';
 import s from './Section.module.css';
 

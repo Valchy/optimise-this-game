@@ -1,6 +1,6 @@
 import { useForm, Controller } from 'react-hook-form';
-import { PhoneNumber, PhoneNumberUtil } from 'google-libphonenumber';
 import DatePicker from 'react-datepicker';
+import type { PhoneNumber } from 'google-libphonenumber';
 import dayjs from 'dayjs';
 
 import 'react-datepicker/dist/react-datepicker.css';
@@ -19,7 +19,9 @@ function daysUntilBirthday(date: Date) {
 	else return `${daysUntilBirthday + 1} days`;
 }
 
-function validatePhoneNumber(value: string) {
+async function validatePhoneNumber(value: string) {
+	const { PhoneNumberUtil } = await import('google-libphonenumber');
+
 	const instance = PhoneNumberUtil.getInstance();
 	try {
 		const phoneNumber = instance.parseAndKeepRawInput(value, 'IS');
@@ -43,7 +45,7 @@ export default function Form() {
 
 	return (
 		<section className={s.form}>
-			<form onSubmit={onSubmit}>
+			<form onSubmit={onSubmit} onFocus={() => import('google-libphonenumber')}>
 				<h2>Sign up for the private beta</h2>
 				<div>
 					<label>Name</label>
