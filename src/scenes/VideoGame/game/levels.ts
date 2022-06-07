@@ -10,7 +10,7 @@ export const getRandomSpawnPosition = (enemyWidth: number): Vector => {
 	const padding = scenePadding + enemyWidth / 2;
 	return {
 		x: Math.random() * (window.innerWidth - padding * 2) + padding,
-		y: -enemyHeight
+		y: -enemyHeight,
 	};
 };
 
@@ -22,7 +22,7 @@ const levelCreators: Array<() => EnemySpawn[]> = [
 			style: 'Red',
 			delay: 2,
 			position: getRandomSpawnPosition(enemyWidth),
-			speed: 0.1
+			speed: 0.1,
 		}));
 	},
 	// Level 2
@@ -34,7 +34,7 @@ const levelCreators: Array<() => EnemySpawn[]> = [
 						style: 'Red',
 						delay: 1.5,
 						position: getRandomSpawnPosition(enemyWidth),
-						speed: 0.1
+						speed: 0.1,
 				  }
 				: {
 						variant: 'sine',
@@ -43,7 +43,7 @@ const levelCreators: Array<() => EnemySpawn[]> = [
 						position: getRandomSpawnPosition(300),
 						speed: 0.06,
 						sineRadius: 150,
-						sineSpeed: 0.1
+						sineSpeed: 0.1,
 				  }
 		);
 	},
@@ -55,36 +55,36 @@ const levelCreators: Array<() => EnemySpawn[]> = [
 				style: 'Red',
 				delay: 0,
 				position: getRandomSpawnPosition(enemyWidth),
-				speed: 0.1
+				speed: 0.1,
 			})),
 			{
 				variant: 'normal',
 				style: 'Red',
 				delay: 3,
 				position: getRandomSpawnPosition(enemyWidth),
-				speed: 0.1
+				speed: 0.1,
 			},
 			...times<EnemySpawn>(4, () => ({
 				variant: 'normal',
 				style: 'Red',
 				delay: 0,
 				position: getRandomSpawnPosition(enemyWidth),
-				speed: 0.1
+				speed: 0.1,
 			})),
 			{
 				variant: 'normal',
 				style: 'Red',
 				delay: 4,
 				position: getRandomSpawnPosition(enemyWidth),
-				speed: 0.1
+				speed: 0.1,
 			},
 			...times<EnemySpawn>(6, () => ({
 				variant: 'normal',
 				style: 'Red',
 				delay: 0,
 				position: getRandomSpawnPosition(enemyWidth),
-				speed: 0.1
-			}))
+				speed: 0.1,
+			})),
 		];
 	},
 	// Level 4
@@ -95,8 +95,8 @@ const levelCreators: Array<() => EnemySpawn[]> = [
 				style: 'Green',
 				delay: 1.5,
 				position: getRandomSpawnPosition(enemyWidth),
-				speed: 0.18
-			}))
+				speed: 0.18,
+			})),
 		];
 	},
 	// Level 5
@@ -109,8 +109,8 @@ const levelCreators: Array<() => EnemySpawn[]> = [
 				position: getRandomSpawnPosition(400 + enemyWidth),
 				speed: 0.1,
 				sineRadius: 200,
-				sineSpeed: 0.1
-			}))
+				sineSpeed: 0.1,
+			})),
 		];
 	},
 	// Level 6
@@ -122,8 +122,8 @@ const levelCreators: Array<() => EnemySpawn[]> = [
 				delay: 0.3,
 				position: getRandomSpawnPosition(enemyWidth),
 				lines: getRandomSnakeLines(true),
-				speed: 0.4
-			}))
+				speed: 0.4,
+			})),
 		];
 	},
 	// Level 7
@@ -138,7 +138,7 @@ const levelCreators: Array<() => EnemySpawn[]> = [
 						position: getRandomSpawnPosition(500 + enemyWidth),
 						speed: 0.12,
 						sineRadius: 250,
-						sineSpeed: 0.05 + Math.random() * 0.3
+						sineSpeed: 0.05 + Math.random() * 0.3,
 					};
 				case 1:
 					return {
@@ -147,7 +147,7 @@ const levelCreators: Array<() => EnemySpawn[]> = [
 						delay: 0.3 + Math.random() * 1,
 						position: getRandomSpawnPosition(enemyWidth),
 						lines: getRandomSnakeLines(Math.random() > 0.5 ? true : false),
-						speed: 0.4
+						speed: 0.4,
 					};
 				default:
 					return {
@@ -155,11 +155,11 @@ const levelCreators: Array<() => EnemySpawn[]> = [
 						style: 'Green',
 						delay: 1 + Math.random() * 1,
 						position: getRandomSpawnPosition(enemyWidth),
-						speed: 0.18
+						speed: 0.18,
 					};
 			}
 		});
-	}
+	},
 ];
 
 export function createLevel(level: number) {
@@ -178,5 +178,5 @@ export const levelBackgrounds = [
 	'hsla(280, 100%, 50%, 0.15)',
 	'hsla(0, 100%, 50%, 0.3)',
 	'hsla(0, 100%, 100%, 0.5)',
-	'hsla(0, 100%, 50%, 0)'
+	'hsla(0, 100%, 50%, 0)',
 ];

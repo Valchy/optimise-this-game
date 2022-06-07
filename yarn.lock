@@ -5825,11 +5825,6 @@ klona@^2.0.4, klona@^2.0.5:
   resolved "https://registry.yarnpkg.com/klona/-/klona-2.0.5.tgz#d166574d90076395d9963aa7a928fabb8d76afbc"
   integrity sha512-pJiBpiXMbt7dkzXe8Ghj/u4FfXOOa98fPW+bihOJ4SjnoijweJrNThJfd3ifXpXhREjpoF2mZVH1GfS9LV3kHQ==
 
-konami-code@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/konami-code/-/konami-code-0.3.0.tgz#558576acf06a930c03e3c583822677094b4f5e90"
-  integrity sha512-Ed8sT+CQmJyfi+AS7NmaErMpSVGdxrF0a1RwQuuIUVeDbTsqTcrGMPdZnKH9dpYUeScyW2sroRW8Ekg9gF+bpw==
-
 language-subtag-registry@~0.3.2:
   version "0.3.21"
   resolved "https://registry.yarnpkg.com/language-subtag-registry/-/language-subtag-registry-0.3.21.tgz#04ac218bea46f04cb039084602c6da9e788dd45a"
@@ -7355,6 +7350,13 @@ react-is@^18.0.0:
   version "18.1.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.1.0.tgz#61aaed3096d30eacf2a2127118b5b41387d32a67"
   integrity sha512-Fl7FuabXsJnV5Q1qIOQwx/sagGF18kogb4gpfcG4gjLBWO0WDiiz1ko/ExayuxE7InyQkBLkxRFG5oxY6Uu3Kg==
+
+react-konami-code@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/react-konami-code/-/react-konami-code-2.3.0.tgz#c78759a098a769536a2a921b8a1412d7f43d3ccb"
+  integrity sha512-9x90HnzstiMXs2kFS9cYsb5a+ojKEB/iC24uzNKCoE9znorLJwUcy98tjsiW2i5AHB05GuqIMTzV5RaDpVSThw==
+  dependencies:
+    prop-types "^15.8.1"
 
 react-onclickoutside@^6.12.0:
   version "6.12.1"
