@@ -7,7 +7,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import s from './Form.module.css';
 
 function daysUntilBirthday(date: Date) {
-	let birthday = dayjs(date);
+	let birthday = dayjs(date).year(new Date().getFullYear());
 
 	if (birthday.isBefore(dayjs())) {
 		birthday = birthday.add(1, 'year');
@@ -16,7 +16,7 @@ function daysUntilBirthday(date: Date) {
 	let daysUntilBirthday = birthday.diff(dayjs(new Date()), 'days');
 	if (daysUntilBirthday >= 364) return 'TODAY';
 	else if (daysUntilBirthday === 0) return 'TOMORROW';
-	else return `${daysUntilBirthday + 1} days`;
+	else return `in ${daysUntilBirthday + 1} days`;
 }
 
 async function validatePhoneNumber(value: string) {
@@ -74,11 +74,11 @@ export default function Form() {
 					<Controller
 						control={control}
 						rules={{ required: true }}
-						render={({ field }) => <DatePicker className={s.input} {...field} selected={field.value} />}
+						render={({ field }) => <DatePicker showMonthDropdown showYearDropdown className={s.input} {...field} selected={field.value} />}
 						name="birthday"
 					/>
 					{errors.birthday && <p className={s.error}>This field is required and should be a valid date.</p>}
-					{birthday && <p>Your birthday is in {daysUntilBirthday(birthday)}. Nice!</p>}
+					{birthday && <p>Your birthday is {daysUntilBirthday(birthday)}. Nice!</p>}
 				</div>
 				<div>
 					<button type="submit">Submit</button>
