@@ -77,13 +77,11 @@ function updateEntities(state: GameState, updateTime: number, delta: number) {
 		const prevStyles = window.getComputedStyle(entity.el);
 		if (entity.type === 'shot') {
 			const newPos = {
-				x: parseFloat(prevStyles.left) + entity.velocity.x * delta,
-				y: parseFloat(prevStyles.top) + entity.velocity.y * delta,
+				x: entity.x + entity.velocity.x * delta,
+				y: entity.y + entity.velocity.y * delta,
 			};
 
-			entity.el.style.left = `${newPos.x}px`;
-			entity.el.style.top = `${newPos.y}px`;
-			// entity.el.style.transform = `translateX(${newPos.x}px) translateY(${newPos.y}px)`;
+			entity.el.style.transform = `translate(600px, 600px)`;
 		} else if (entity.type === 'enemy') {
 			// Enemies move differently based on their variant.
 			const { speed, variant } = entity.enemySpawn;
@@ -91,7 +89,7 @@ function updateEntities(state: GameState, updateTime: number, delta: number) {
 			// Normal and "sine" enemies generally move down according to some speed.
 			if (variant === 'normal' || variant === 'sine') {
 				const newY = parseFloat(prevStyles.top) + window.innerHeight * entity.enemySpawn.speed * delta;
-				entity.el.style.top = `${newY}px`;
+				entity.el.style.transform = `translateY(${newY}px)`;
 			}
 
 			// Additionally, "sine" enemies move in a sine wave pattern.
@@ -99,14 +97,13 @@ function updateEntities(state: GameState, updateTime: number, delta: number) {
 				const newX =
 					entity.enemySpawn.position.x +
 					Math.sin((updateTime * entity.enemySpawn.sineSpeed * window.innerHeight) / 100) * entity.enemySpawn.sineRadius;
-				entity.el.style.left = `${newX}px`;
+				entity.el.style.transform = `translateX(${newX}px)`;
 			}
 
 			// Finally, "snake" enemies move according to predefined lines across the screen.
 			if (variant === 'snake') {
 				const newPos = getSnakePosition(entity.enemySpawn.lines, updateTime - entity.spawnTime, speed);
-				entity.el.style.left = `${newPos.x}px`;
-				entity.el.style.top = `${newPos.y}px`;
+				entity.el.style.transform = `translate(${newPos.x}px, ${newPos.y}px)`;
 			}
 		}
 	});

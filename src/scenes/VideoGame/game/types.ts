@@ -70,11 +70,15 @@ export interface Enemy extends EntityBase {
 	type: 'enemy';
 	spawnTime: number;
 	enemySpawn: EnemySpawn;
+	x: number;
+	y: number;
 }
 
 interface Shot extends EntityBase {
 	type: 'shot';
 	velocity: Vector;
+	x: number;
+	y: number;
 }
 
 export type Entity = Shot | Enemy;

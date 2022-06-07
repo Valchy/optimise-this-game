@@ -15,14 +15,15 @@ export function createEnemy(enemySpawn: EnemySpawn, spawnTime: number): Entity {
 
 	const el = document.createElement('div');
 	el.className = classnames(s.entity, s.entityEnemy, s[`entityEnemy${style}`]);
-	el.style.left = `${x}px`;
-	el.style.top = `${y}px`;
+	el.style.transform = `translate(${x}px, ${y}px)`;
 
 	return {
 		type: 'enemy',
 		el,
 		spawnTime,
 		enemySpawn,
+		x,
+		y,
 	};
 }
 
@@ -31,21 +32,25 @@ export function createEnemy(enemySpawn: EnemySpawn, spawnTime: number): Entity {
  */
 export function createShot(barrelAngle: number): Entity {
 	let { x, y } = getBarrelPosition();
+
 	x += barrelLength * Math.cos(barrelAngle);
 	y += barrelLength * Math.sin(barrelAngle);
+
 	const velocity = {
 		x: window.innerHeight * shotVelocity * Math.cos(barrelAngle),
 		y: window.innerHeight * shotVelocity * Math.sin(barrelAngle),
 	};
+
 	const el = document.createElement('div');
 	el.className = classnames(s.entity, s.entityShot);
-	el.style.left = `${x}px`;
-	el.style.top = `${y}px`;
+	el.style.transform = `translate(${x}px, ${y}px)`;
 
 	return {
 		type: 'shot',
 		velocity,
 		el,
+		x,
+		y,
 	};
 }
 
