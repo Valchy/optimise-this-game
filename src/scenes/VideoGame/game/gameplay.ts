@@ -72,39 +72,40 @@ function updateBarrel(state: GameState) {
  * Move each entity according to their movement rules.
  */
 function updateEntities(state: GameState, updateTime: number, delta: number) {
+	const windowHeight = window.innerHeight;
+
 	state.entities.forEach(entity => {
 		// Shots go in a straight direction based on their velocity.
-		const prevStyles = window.getComputedStyle(entity.el);
 		if (entity.type === 'shot') {
-			const newPos = {
-				x: entity.x + entity.velocity.x * delta,
-				y: entity.y + entity.velocity.y * delta,
-			};
+			entity.x = entity.x + entity.velocity.x * delta;
+			entity.y = entity.y + entity.velocity.y * delta;
 
-			entity.el.style.transform = `translate(600px, 600px)`;
+			entity.el.style.transform = `translate(${entity.x}px, ${entity.y}px)`;
 		} else if (entity.type === 'enemy') {
 			// Enemies move differently based on their variant.
 			const { speed, variant } = entity.enemySpawn;
 
 			// Normal and "sine" enemies generally move down according to some speed.
 			if (variant === 'normal' || variant === 'sine') {
-				const newY = parseFloat(prevStyles.top) + window.innerHeight * entity.enemySpawn.speed * delta;
-				entity.el.style.transform = `translateY(${newY}px)`;
+				entity.y = entity.y + windowHeight * entity.enemySpawn.speed * delta;
 			}
 
 			// Additionally, "sine" enemies move in a sine wave pattern.
 			if (variant === 'sine') {
-				const newX =
+				entity.x =
+					entity.x +
 					entity.enemySpawn.position.x +
-					Math.sin((updateTime * entity.enemySpawn.sineSpeed * window.innerHeight) / 100) * entity.enemySpawn.sineRadius;
-				entity.el.style.transform = `translateX(${newX}px)`;
+					Math.sin((updateTime * entity.enemySpawn.sineSpeed * windowHeight) / 100) * entity.enemySpawn.sineRadius;
 			}
 
 			// Finally, "snake" enemies move according to predefined lines across the screen.
 			if (variant === 'snake') {
-				const newPos = getSnakePosition(entity.enemySpawn.lines, updateTime - entity.spawnTime, speed);
-				entity.el.style.transform = `translate(${newPos.x}px, ${newPos.y}px)`;
+				const { x, y } = getSnakePosition(entity.enemySpawn.lines, updateTime - entity.spawnTime, speed);
+				entity.x = x;
+				entity.y = y;
 			}
+
+			entity.el.style.transform = `translate(${entity.x}px, ${entity.y}px)`;
 		}
 	});
 }
