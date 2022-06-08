@@ -19,14 +19,23 @@ export default () => {
 	};
 
 	const mouseClick = () => {
-		playSound('shoot.mp3');
 		if (gameState.current.konami && !gameState.current.rapidFire) {
+			let shotCount = 0;
 			gameState.current.rapidFire = true;
+
 			const rapidFire = setInterval(() => {
 				if (gameState.current.isGameOver) clearInterval(rapidFire);
+
+				if (shotCount === 0) playSound('shoot.mp3');
+				else if (shotCount === 5) shotCount = 0;
+				else shotCount++;
+
 				onMouseClick(gameState.current);
 			}, 100);
-		} else onMouseClick(gameState.current);
+		} else {
+			playSound('shoot.mp3');
+			onMouseClick(gameState.current);
+		}
 	};
 
 	useAnimationFrame(time => {
