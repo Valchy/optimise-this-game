@@ -254,7 +254,7 @@ function checkEndLevel(state: GameState) {
 			`<h1>Congratulations!</h1>
 			<p>You won the game!</p>
 			<p>Total score: ${state.score}</p>
-			<p>${state.konami ? 'Reload' : 'Click'} to play again :)</p>`,
+			<p>${state.konami ? 'Since you cheated, reload to play again NORMALLY!' : 'Click to play again :)'}</p>`,
 			Number.MAX_VALUE
 		);
 		state.isGameOver = true;

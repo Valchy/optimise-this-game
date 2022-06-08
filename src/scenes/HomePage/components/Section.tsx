@@ -7,7 +7,7 @@ export const Section = () => {
 	const info = useMemo(
 		() => ({
 			title: faker.lorem.sentence(),
-			body: faker.lorem.paragraphs().split('\n')
+			body: faker.lorem.paragraphs().split('\n'),
 		}),
 		[]
 	);
