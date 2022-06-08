@@ -93,7 +93,6 @@ function updateEntities(state: GameState, updateTime: number, delta: number) {
 			// Additionally, "sine" enemies move in a sine wave pattern.
 			if (variant === 'sine') {
 				entity.x =
-					entity.x +
 					entity.enemySpawn.position.x +
 					Math.sin((updateTime * entity.enemySpawn.sineSpeed * windowHeight) / 100) * entity.enemySpawn.sineRadius;
 			}
