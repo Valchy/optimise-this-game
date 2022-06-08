@@ -104,6 +104,7 @@ function updateEntities(state: GameState, updateTime: number, delta: number) {
 				entity.y = y;
 			}
 
+			// Translate the entity to its new position
 			entity.el.style.transform = `translate(${entity.x}px, ${entity.y}px)`;
 		}
 	});
