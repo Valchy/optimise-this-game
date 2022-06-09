@@ -33,3 +33,10 @@ export const shotVelocity = 0.8;
  * How many bonus points can you get in the end of a level. This gets multiplied by the accuracy.
  */
 export const bonusScore = 1000;
+
+/* Entity width and height */
+export const entityWidth = 60;
+export const entityHeight = 40;
+
+/* Shot width and height */
+export const shotDimensions = 12;

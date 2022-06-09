@@ -2,7 +2,7 @@ import { createEnemy, scoreFromEnemy } from './entities';
 import { addEntity, killAllEntities, killEntity, removeDeadEntities } from './state';
 import { Enemy, Entity, GameState } from './types';
 import { createLevel, levelBackgrounds } from './levels';
-import { bonusScore } from './constants';
+import { bonusScore, shotDimensions, entityWidth, entityHeight } from './constants';
 import { getSnakePosition } from './utils';
 import { playSound } from './actions';
 
@@ -120,18 +120,15 @@ function checkCollisions(state: GameState) {
 
 	state.entities.forEach(entityA => {
 		// Ignore "dead" entities ... (we'll clean them up right after).
-		if (entityA.dead) {
-			return;
-		}
+		if (entityA.dead) return;
 
 		// Check if the entity is colliding with the screen boundaries.
-		const rectA = entityA.el.getBoundingClientRect();
 		const outsideBounds =
 			entityA.type === 'shot'
 				? // Shots collide with all boundaries.
-				  rectA.top > window.innerHeight || rectA.bottom < 0 || rectA.left > window.innerWidth || rectA.right < 0
+				  entityA.y > windowHeight || entityA.y + shotDimensions < 0 || entityA.x > windowWidth || entityA.x + shotDimensions < 0
 				: // Enemies only collide with bottom of screen.
-				  rectA.top > window.innerHeight;
+				  entityA.y > windowHeight;
 
 		if (outsideBounds) {
 			if (entityA.type === 'enemy') {
@@ -144,13 +141,16 @@ function checkCollisions(state: GameState) {
 		} else {
 			// Check if the entity is colliding with other entities.
 			state.entities.forEach(entityB => {
-				if (entityB.dead) {
-					return;
-				}
-				const rectB = entityB.el.getBoundingClientRect();
+				// Ignore "dead" entities ... (we'll clean them up right after).
+				if (entityB.dead) return;
 
 				// Such simple code, but still capable of causing a migraine. 🙃
-				const hit = !(rectB.left > rectA.right || rectB.right < rectA.left || rectB.top > rectA.bottom || rectB.bottom < rectA.top);
+				const hit = !(
+					entityB.x > entityA.x ||
+					entityB.x + entityWidth < entityA.x ||
+					entityB.y > entityA.y ||
+					entityB.y + entityHeight < entityA.y
+				);
 
 				// Hardcoding entityA=shot and entityB=enemy since we're checking every combination anyways. 😇
 				const shotVsEnemy = entityA.type === 'shot' && entityB.type === 'enemy';
