@@ -26,7 +26,7 @@ export default () => {
 			const rapidFire = setInterval(() => {
 				if (gameState.current.isGameOver) clearInterval(rapidFire);
 
-				if (shotCount === 0) playSound('shoot.mp3');
+				if (shotCount === 0 && gameState.current.modalTime <= 0) playSound('shoot.mp3');
 				else if (shotCount === 5) shotCount = 0;
 				else shotCount++;
 

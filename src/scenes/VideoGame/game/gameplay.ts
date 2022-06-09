@@ -139,15 +139,13 @@ function checkCollisions(state: GameState, delta: number) {
 		// Delete entity if outside bounds
 		if (outsideBounds) {
 			if (entity.type === 'enemy') {
-				// Oh no!
+				// Lose life and Update some misc UI elements.
 				loseLive(state);
+				updateStatus(state);
 			} else {
 				// Basically a shot hitting the edge... Nothing dramatic.
 				killEntity(entity);
 			}
-
-			// Update some misc UI elements.
-			updateStatus(state);
 		} else {
 			if (entity.type === 'enemy') enemies.push(entity);
 			else shots.push(entity);
