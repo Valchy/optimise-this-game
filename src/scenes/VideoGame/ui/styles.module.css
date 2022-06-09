@@ -111,6 +111,7 @@
 	margin: -6px 0 0 -6px;
 	border-radius: 50%;
 	background: #f5f0e8;
+	will-change: transform;
 	background-image: url('./ball-texture.jpg');
 	background-size: cover;
 	/* The fact that the image looks the way it looks is a feature. not a bug :P */
@@ -122,6 +123,7 @@
 	width: 60px;
 	height: 40px;
 	margin: -20px 0 0 -30px;
+	will-change: transform;
 	background: #ffffff;
 }
 
