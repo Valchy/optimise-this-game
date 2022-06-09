@@ -27,6 +27,7 @@ export interface GameState {
 	isGameOver: boolean;
 	konami: boolean;
 	rapidFire: boolean;
+	gameInit: boolean;
 }
 
 export type EnemyStyle = 'Red' | 'Green' | 'Purple' | 'Blue';

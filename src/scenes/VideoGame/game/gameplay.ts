@@ -28,10 +28,13 @@ export function update(state: GameState, updateTime: number) {
 
 	// Check if there are collisions, either between entities (shots and enemies) or between entities
 	// and the screen boundaries.
-	checkCollisions(state);
+	checkCollisions(state, delta);
 
 	// Update some misc UI elements.
-	updateUI(state, delta);
+	if (state.gameInit || (state.isGameOver && state.modalTime <= 0)) {
+		state.gameInit = false;
+		updateUI(state, delta);
+	}
 }
 
 /**
@@ -115,7 +118,7 @@ function updateEntities(state: GameState, updateTime: number, delta: number) {
 /**
  * Collision detection. How fun!
  */
-function checkCollisions(state: GameState) {
+function checkCollisions(state: GameState, delta: number) {
 	const windowWidth = window.innerWidth;
 	const windowHeight = window.innerHeight;
 	const enemies: Enemy[] = [];
@@ -140,6 +143,9 @@ function checkCollisions(state: GameState) {
 				// Basically a shot hitting the edge... Nothing dramatic.
 				killEntity(entity);
 			}
+
+			// Update some misc UI elements.
+			updateUI(state, delta);
 		} else {
 			if (entity.type === 'enemy') enemies.push(entity);
 			else shots.push(entity);
@@ -164,6 +170,9 @@ function checkCollisions(state: GameState) {
 				state.score += scoreFromEnemy(enemy, state.konami);
 
 				checkEndLevel(state);
+
+				// Update some misc UI elements.
+				updateUI(state, delta);
 			}
 		});
 	});
@@ -205,8 +214,17 @@ function loseLive(state: GameState) {
 	if (state.lives === 0) {
 		state.enemySpawns = [];
 		state.isGameOver = true;
+
 		playSound('defeat.mp3');
-		showModal(state, `<h1>Game Over!</h1><p>Score: ${state.score}</p><p>Click to play again :)</p>`, Number.MAX_VALUE);
+		showModal(
+			state,
+			`
+			<h1>Game Over!</h1>
+			<p>Score: ${state.score}</p>
+			<p>${state.konami ? 'Since you cheated, reload to play again NORMALLY!' : 'Click to play again :)'}</p>
+		`,
+			Number.MAX_VALUE
+		);
 	} else {
 		playSound('life-loss.mp3');
 		showModal(state, `<h1>Whoops!</h1>`, 2);

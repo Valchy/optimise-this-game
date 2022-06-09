@@ -33,7 +33,7 @@ export default () => {
 				onMouseClick(gameState.current);
 			}, 100);
 		} else {
-			playSound('shoot.mp3');
+			if (!gameState.current.isGameOver) playSound('shoot.mp3');
 			onMouseClick(gameState.current);
 		}
 	};

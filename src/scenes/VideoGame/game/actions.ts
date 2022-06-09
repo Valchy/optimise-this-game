@@ -21,14 +21,8 @@ export const onMouseMove = (state: GameState, x: number, y: number) => {
  * Update the game state from a mouse click.
  */
 export function onMouseClick(state: GameState) {
-	if (state.isGameOver && !state.konami) {
-		restartGame(state);
-		return;
-	}
-
-	if (state.modalTime > 0) {
-		return;
-	}
+	if (state.isGameOver && !state.konami) return restartGame(state);
+	if (state.modalTime > 0) return;
 
 	state.shotCount++;
 	addEntity(state, createShot(state.barrelAngle));
