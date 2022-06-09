@@ -33,8 +33,10 @@ export function update(state: GameState, updateTime: number) {
 	// Update some misc UI elements.
 	if (state.gameInit || (state.isGameOver && state.modalTime <= 0)) {
 		state.gameInit = false;
-		updateUI(state, delta);
+		updateStatus(state);
 	}
+
+	updateUI(state, delta);
 }
 
 /**
@@ -145,7 +147,7 @@ function checkCollisions(state: GameState, delta: number) {
 			}
 
 			// Update some misc UI elements.
-			updateUI(state, delta);
+			updateStatus(state);
 		} else {
 			if (entity.type === 'enemy') enemies.push(entity);
 			else shots.push(entity);
@@ -172,7 +174,7 @@ function checkCollisions(state: GameState, delta: number) {
 				checkEndLevel(state);
 
 				// Update some misc UI elements.
-				updateUI(state, delta);
+				updateStatus(state);
 			}
 		});
 	});
@@ -184,12 +186,14 @@ function checkCollisions(state: GameState, delta: number) {
 /**
  * Update misc UI elements.
  */
-function updateUI(state: GameState, delta: number) {
+function updateStatus(state: GameState) {
 	// Update the gameplay status UI.
 	if (state.statusEl) {
 		state.statusEl.innerText = `Level: ${state.level}\nLives: ${state.lives}\nScore: ${state.score}`;
 	}
+}
 
+function updateUI(state: GameState, delta: number) {
 	// Show and hide the modal.
 	if (state.modalEl) {
 		state.modalEl.style.opacity = state.modalTime ? '1' : '0';
@@ -266,13 +270,15 @@ function checkEndLevel(state: GameState) {
 	state.level++;
 	state.enemySpawns = createLevel(state.level);
 	state.enemyCount = state.enemySpawns.length;
+
 	if (state.levelBgEl) {
-		state.levelBgEl.style.backgroundColor = levelBackgrounds[state.level];
+		state.levelBgEl.style.opacity = levelBackgrounds[state.level];
 	}
 
 	// Or end the game.
 	if (state.enemySpawns.length === 0) {
 		playSound('victory.mp3');
+
 		showModal(
 			state,
 			`<h1>Congratulations!</h1>
@@ -281,6 +287,7 @@ function checkEndLevel(state: GameState) {
 			<p>${state.konami ? 'Since you cheated, reload to play again NORMALLY!' : 'Click to play again :)'}</p>`,
 			Number.MAX_VALUE
 		);
+
 		state.isGameOver = true;
 	}
 }

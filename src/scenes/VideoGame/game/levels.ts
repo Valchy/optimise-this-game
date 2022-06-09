@@ -168,14 +168,4 @@ export function createLevel(level: number) {
 	return [];
 }
 
-export const levelBackgrounds = [
-	'hsla(0, 100%, 50%, 0.15)',
-	'hsla(40, 100%, 50%, 0.15)',
-	'hsla(80, 100%, 50%, 0.15)',
-	'hsla(120, 100%, 50%, 0.15)',
-	'hsla(200, 100%, 50%, 0.15)',
-	'hsla(280, 100%, 50%, 0.15)',
-	'hsla(0, 100%, 50%, 0.3)',
-	'hsla(0, 100%, 100%, 0.5)',
-	'hsla(0, 100%, 50%, 0)',
-];
+export const levelBackgrounds = ['0', '0', '0.02', '0.05', '0.1', '0.15', '0.2', '0.35'];

@@ -37,7 +37,7 @@ export const initialState = (): GameState => {
  * Wait 1 second before starting.
  */
 export const restartGame = (state: GameState) => {
-	const { level, score, enemySpawns, lives, shotCount, enemyCount, isGameOver, gameInit, modalTime } = initialState();
+	const { level, score, enemySpawns, lives, shotCount, enemyCount, isGameOver, gameInit } = initialState();
 	Object.assign(state, {
 		level,
 		score,
@@ -47,7 +47,7 @@ export const restartGame = (state: GameState) => {
 		enemyCount,
 		isGameOver,
 		gameInit,
-		modalTime,
+		modalTime: 1,
 	});
 };
 
