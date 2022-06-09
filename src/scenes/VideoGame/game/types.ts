@@ -74,7 +74,7 @@ export interface Enemy extends EntityBase {
 	y: number;
 }
 
-interface Shot extends EntityBase {
+export interface Shot extends EntityBase {
 	type: 'shot';
 	velocity: Vector;
 	spin: number;

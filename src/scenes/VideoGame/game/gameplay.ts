@@ -1,6 +1,6 @@
 import { createEnemy, scoreFromEnemy } from './entities';
 import { addEntity, killAllEntities, killEntity, removeDeadEntities } from './state';
-import { Enemy, Entity, GameState } from './types';
+import { Enemy, Shot, GameState } from './types';
 import { createLevel, levelBackgrounds } from './levels';
 import { bonusScore, shotDimensions, entityWidth, entityHeight } from './constants';
 import { getSnakePosition } from './utils';
@@ -117,53 +117,54 @@ function updateEntities(state: GameState, updateTime: number, delta: number) {
 function checkCollisions(state: GameState) {
 	const windowWidth = window.innerWidth;
 	const windowHeight = window.innerHeight;
+	const enemies: Enemy[] = [];
+	const shots: Shot[] = [];
 
-	state.entities.forEach(entityA => {
-		// Ignore "dead" entities ... (we'll clean them up right after).
-		if (entityA.dead) return;
-
+	// Filter out all dead enemies and shots outside scope
+	state.entities.forEach(entity => {
 		// Check if the entity is colliding with the screen boundaries.
 		const outsideBounds =
-			entityA.type === 'shot'
+			entity.type === 'shot'
 				? // Shots collide with all boundaries.
-				  entityA.y > windowHeight || entityA.y + shotDimensions < 0 || entityA.x > windowWidth || entityA.x + shotDimensions < 0
+				  entity.y > windowHeight || entity.y + shotDimensions < 0 || entity.x > windowWidth || entity.x + shotDimensions < 0
 				: // Enemies only collide with bottom of screen.
-				  entityA.y > windowHeight;
+				  entity.y > windowHeight;
 
+		// Delete entity if outside bounds
 		if (outsideBounds) {
-			if (entityA.type === 'enemy') {
+			if (entity.type === 'enemy') {
 				// Oh no!
 				loseLive(state);
 			} else {
 				// Basically a shot hitting the edge... Nothing dramatic.
-				killEntity(entityA);
+				killEntity(entity);
 			}
 		} else {
-			// Check if the entity is colliding with other entities.
-			state.entities.forEach(entityB => {
-				// Ignore "dead" entities ... (we'll clean them up right after).
-				if (entityB.dead) return;
-
-				// Such simple code, but still capable of causing a migraine. 🙃
-				const hit = !(
-					entityB.x > entityA.x ||
-					entityB.x + entityWidth < entityA.x ||
-					entityB.y > entityA.y ||
-					entityB.y + entityHeight < entityA.y
-				);
-
-				// Hardcoding entityA=shot and entityB=enemy since we're checking every combination anyways. 😇
-				const shotVsEnemy = entityA.type === 'shot' && entityB.type === 'enemy';
-				if (hit && shotVsEnemy) {
-					// Yay!
-					killEntity(entityA);
-					killEntity(entityB);
-					state.score += scoreFromEnemy(entityB, state.konami);
-
-					checkEndLevel(state);
-				}
-			});
+			if (entity.type === 'enemy') enemies.push(entity);
+			else shots.push(entity);
 		}
+	});
+
+	// Check for collisions between shots and enemies
+	shots.forEach(shot => {
+		// Check if the entity is colliding with other entities.
+		enemies.forEach(enemy => {
+			// Ignore "dead" entities ... (we'll clean them up right after).
+			if (enemy.dead) return;
+
+			// Such simple code, but still capable of causing a migraine. 🙃
+			const hit = !(enemy.x > shot.x || enemy.x + entityWidth < shot.x || enemy.y > shot.y || enemy.y + entityHeight < shot.y);
+
+			// If hit kill the enemy and shot
+			if (hit) {
+				// Yay!
+				killEntity(shot);
+				killEntity(enemy);
+				state.score += scoreFromEnemy(enemy, state.konami);
+
+				checkEndLevel(state);
+			}
+		});
 	});
 
 	// Filter dead entities.
