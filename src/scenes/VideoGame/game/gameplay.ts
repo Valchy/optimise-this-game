@@ -160,7 +160,12 @@ function checkCollisions(state: GameState, delta: number) {
 			if (enemy.dead) return;
 
 			// Such simple code, but still capable of causing a migraine. 🙃
-			const hit = !(enemy.x > shot.x || enemy.x + enemyWidth < shot.x || enemy.y > shot.y || enemy.y + enemyHeight < shot.y);
+			const hit = !(
+				enemy.x > shot.x ||
+				enemy.x + enemyWidth < shot.x - shotDimensions ||
+				enemy.y > shot.y ||
+				enemy.y + enemyHeight < shot.y - shotDimensions
+			);
 
 			// If hit kill the enemy and shot
 			if (hit) {
