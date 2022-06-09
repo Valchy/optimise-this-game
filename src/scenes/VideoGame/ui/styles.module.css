@@ -23,7 +23,7 @@
 	bottom: 10px;
 	height: 24px;
 	width: 80px;
-	background: #2aa198;
+	background: #adaea4;
 	border-radius: 4px 4px 0 0;
 	box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.2), 0 0 5px rgba(0, 0, 0, 0.4) inset;
 	background-image: url('./metal-texture.jpg');
@@ -39,7 +39,7 @@
 	width: 20px;
 	height: 20px;
 	border-radius: 50%;
-	background: #2aa198;
+	background: #d3e132;
 	bottom: -10px;
 	z-index: -1;
 	background-image: url('./gold-texture.jpg');
@@ -63,7 +63,7 @@
 	left: 50%;
 	margin-left: -6px;
 	bottom: calc(100% - 10px);
-	background: #1a9744;
+	background: #d3e132;
 	box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
 	transform-origin: 6px 44px;
 	background-image: url('./gold-texture.jpg');
@@ -110,7 +110,7 @@
 	height: 12px;
 	margin: -6px 0 0 -6px;
 	border-radius: 50%;
-	background: #ffa500;
+	background: #f5f0e8;
 	background-image: url('./ball-texture.jpg');
 	background-size: cover;
 	/* The fact that the image looks the way it looks is a feature. not a bug :P */
@@ -126,28 +126,28 @@
 }
 
 .entityEnemyRed {
-	background: #ff0000;
+	background: #f97720;
 	background-image: url('./brick-texture.jpg');
 	background-size: cover;
 	background-position: center center;
 }
 
 .entityEnemyGreen {
-	background: #00ff00;
+	background: #02a902;
 	background-image: url('./grass-texture.jpg');
 	background-size: cover;
 	background-position: center center;
 }
 
 .entityEnemyPurple {
-	background: #ff00ff;
+	background: #766657;
 	background-image: url('./rock-texture.jpg');
 	background-size: cover;
 	background-position: center center;
 }
 
 .entityEnemyBlue {
-	background: #0000ff;
+	background: #696970;
 	background-image: url('./stone-texture.jpg');
 	background-size: cover;
 	background-position: center center;
