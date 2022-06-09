@@ -48,6 +48,7 @@ export function createShot(barrelAngle: number): Entity {
 	return {
 		type: 'shot',
 		velocity,
+		spin: 0,
 		el,
 		x,
 		y,

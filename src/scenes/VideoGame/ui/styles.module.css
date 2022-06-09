@@ -25,8 +25,10 @@
 	width: 80px;
 	background: #2aa198;
 	border-radius: 4px 4px 0 0;
-
 	box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.2), 0 0 5px rgba(0, 0, 0, 0.4) inset;
+	background-image: url('./metal-texture.jpg');
+	background-size: cover;
+	background-position: center center;
 }
 
 /* wheels */
@@ -40,6 +42,9 @@
 	background: #2aa198;
 	bottom: -10px;
 	z-index: -1;
+	background-image: url('./gold-texture.jpg');
+	background-size: cover;
+	background-position: center center;
 }
 
 .turret::before {
@@ -61,6 +66,9 @@
 	background: #1a9744;
 	box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
 	transform-origin: 6px 44px;
+	background-image: url('./gold-texture.jpg');
+	background-size: cover;
+	background-position: center center;
 }
 
 .status {
@@ -103,6 +111,11 @@
 	margin: -6px 0 0 -6px;
 	border-radius: 50%;
 	background: #ffa500;
+	background-image: url('./ball-texture.jpg');
+	background-size: cover;
+	/* The fact that the image looks the way it looks is a feature. not a bug :P */
+	/* It looks better with the white and the half of the ball rather than with */
+	/* background-position: center center; */
 }
 
 .entityEnemy {
@@ -114,16 +127,28 @@
 
 .entityEnemyRed {
 	background: #ff0000;
+	background-image: url('./brick-texture.jpg');
+	background-size: cover;
+	background-position: center center;
 }
 
 .entityEnemyGreen {
 	background: #00ff00;
+	background-image: url('./grass-texture.jpg');
+	background-size: cover;
+	background-position: center center;
 }
 
 .entityEnemyPurple {
 	background: #ff00ff;
+	background-image: url('./rock-texture.jpg');
+	background-size: cover;
+	background-position: center center;
 }
 
 .entityEnemyBlue {
 	background: #0000ff;
+	background-image: url('./stone-texture.jpg');
+	background-size: cover;
+	background-position: center center;
 }

@@ -79,8 +79,9 @@ function updateEntities(state: GameState, updateTime: number, delta: number) {
 		if (entity.type === 'shot') {
 			entity.x = entity.x + entity.velocity.x * delta;
 			entity.y = entity.y + entity.velocity.y * delta;
+			entity.spin += 1;
 
-			entity.el.style.transform = `translate(${entity.x}px, ${entity.y}px)`;
+			entity.el.style.transform = `translate(${entity.x}px, ${entity.y}px) rotateZ(${entity.spin}deg)`;
 		} else if (entity.type === 'enemy') {
 			// Enemies move differently based on their variant.
 			const { speed, variant } = entity.enemySpawn;
@@ -114,6 +115,9 @@ function updateEntities(state: GameState, updateTime: number, delta: number) {
  * Collision detection. How fun!
  */
 function checkCollisions(state: GameState) {
+	const windowWidth = window.innerWidth;
+	const windowHeight = window.innerHeight;
+
 	state.entities.forEach(entityA => {
 		// Ignore "dead" entities ... (we'll clean them up right after).
 		if (entityA.dead) {
