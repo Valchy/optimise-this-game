@@ -122,7 +122,8 @@
 .entityEnemy {
 	width: 60px;
 	height: 40px;
-	margin: -20px 0 0 -30px;
+	/* Almost made me wanna... good I saw it quick */
+	/* margin: -20px 0 0 -30px; */
 	will-change: transform;
 	background: #ffffff;
 }
