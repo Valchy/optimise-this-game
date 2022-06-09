@@ -2,7 +2,7 @@ import { createEnemy, scoreFromEnemy } from './entities';
 import { addEntity, killAllEntities, killEntity, removeDeadEntities } from './state';
 import { Enemy, Shot, GameState } from './types';
 import { createLevel, levelBackgrounds } from './levels';
-import { bonusScore, shotDimensions, entityWidth, entityHeight } from './constants';
+import { bonusScore, shotDimensions, enemyWidth, enemyHeight } from './constants';
 import { getSnakePosition } from './utils';
 import { playSound } from './actions';
 
@@ -45,6 +45,7 @@ function checkSpawn(state: GameState, updateTime: number) {
 	if (state.modalTime > 0) {
 		return;
 	}
+
 	const { enemySpawns, lastSpawnTime } = state;
 	const enemySpawn = enemySpawns[0];
 
@@ -153,7 +154,7 @@ function checkCollisions(state: GameState) {
 			if (enemy.dead) return;
 
 			// Such simple code, but still capable of causing a migraine. 🙃
-			const hit = !(enemy.x > shot.x || enemy.x + entityWidth < shot.x || enemy.y > shot.y || enemy.y + entityHeight < shot.y);
+			const hit = !(enemy.x > shot.x || enemy.x + enemyWidth < shot.x || enemy.y > shot.y || enemy.y + enemyHeight < shot.y);
 
 			// If hit kill the enemy and shot
 			if (hit) {

@@ -21,7 +21,8 @@ export const scenePadding = 20;
 /**
  * How big are the enemies in pixels.
  */
-export const enemyHeight = 50;
+// export const enemyHeight = 50; // Was this a bug Eiki? CSS says 40px height...
+export const enemyHeight = 40;
 export const enemyWidth = 60;
 
 /**
@@ -34,9 +35,5 @@ export const shotVelocity = 0.8;
  */
 export const bonusScore = 1000;
 
-/* Entity width and height */
-export const entityWidth = 60;
-export const entityHeight = 40;
-
-/* Shot width and height */
+/* Shot Dimensions */
 export const shotDimensions = 12;

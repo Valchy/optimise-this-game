@@ -7,10 +7,9 @@ import times from 'lodash/times';
  * Generate a random position for an enemy. Tries to responsively account for enemy widths and padding.
  */
 export const getRandomSpawnPosition = (enemyWidth: number): Vector => {
-	const padding = scenePadding + enemyWidth / 2;
 	return {
-		x: Math.random() * (window.innerWidth - padding * 2) + padding,
-		y: -enemyHeight,
+		x: Math.random() * (window.innerWidth - enemyWidth * 2) + enemyWidth / 2,
+		y: -enemyHeight * 1.5,
 	};
 };
 
